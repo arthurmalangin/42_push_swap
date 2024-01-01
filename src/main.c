@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 16:50:00 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/01 23:05:49 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/01 23:38:21 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,10 @@ int main(int argc, char **argv)
         ft_putstr_fd("Error\n", 2);
         return (0);
     }
-    fill_stack(&stack, ft_split(argv[1], ' '));
+    if (argc == 2)
+        fill_stack(&stack, ft_split(argv[1], ' '));
+    else
+        fill_stack(&stack, argv);
     sort(&stack, &stack_b);
     return (0);
 }

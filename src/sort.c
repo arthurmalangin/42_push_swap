@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 19:46:54 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/02 01:11:52 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/02 15:48:19 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void sort(t_stack **stack_a, t_stack **stack_b)
 		return;
 	int min_b;
 	int max_b;
+	int min_a;
+	int max_a;
 
 	pb(stack_a, stack_b);
 	pb(stack_a, stack_b);
@@ -42,54 +44,83 @@ void sort(t_stack **stack_a, t_stack **stack_b)
 	{
 		rb(stack_b);
 	}
-	while (*stack_a)
+	if (stacksize(*stack_a) == 3)
 	{
-		if ((*stack_a)->value > max_b)
+		while (!is_sorted_reverse(*stack_a))
 		{
-			max_b = (*stack_a)->value;
-			pb(stack_a, stack_b);
-		}
-		else if ((*stack_a)->value < min_b)
-		{
-			min_b = (*stack_a)->value;
-			pb(stack_a, stack_b);
-			rb(stack_b);
-		}
-		else
-		{
-			ra(stack_a);
-			while (get_end_value(*stack_a) < max_b)
+			max_a = find_max(*stack_a);
+			min_a = find_min(*stack_a);
+			if ((*stack_a)->value == max_a)
 			{
-				pa(stack_a, stack_b);
-				max_b = find_max(*stack_b);
+				ra(stack_a);
+				sa(stack_a);
 			}
-			rra(stack_a);
-			max_b = (*stack_a)->value;
-			pb(stack_a, stack_b);
+			else if ((*stack_a)->value == min_a)
+			{
+				ra(stack_a);
+			}
+			else
+			{
+				sa(stack_a);
+			}
 		}
-	}
-	while (*stack_b)
+		if (find_max(*stack_a) < (*stack_b)->value)
+		{
+			pa(stack_a, stack_b);
+			ra(stack_a);
+		}
+		else if (find_min(*stack_a) > (*stack_b)->value)
+		{
+			pa(stack_a, stack_b);
+		}
+		while ((*stack_a)->value < (*stack_b)->value)
+			ra(stack_a);
 		pa(stack_a, stack_b);
+		while (!is_sorted)
+			ra(stack_a);
+	}
+	// while (*stack_a)
+	// {
+	// 	if ((*stack_a)->value > max_b)
+	// 	{
+	// 		max_b = (*stack_a)->value;
+	// 		pb(stack_a, stack_b);
+	// 	}
+	// 	else if ((*stack_a)->value < min_b)
+	// 	{
+	// 		min_b = (*stack_a)->value;
+	// 		pb(stack_a, stack_b);
+	// 		rb(stack_b);
+	// 	}
+	// 	else
+	// 	{
+	// 		ra(stack_a);
+	// 		while (get_end_value(*stack_a) < max_b)
+	// 		{
+	// 			pa(stack_a, stack_b);
+	// 			max_b = find_max(*stack_b);
+	// 		}
+	// 		rra(stack_a);
+	// 		max_b = (*stack_a)->value;
+	// 		pb(stack_a, stack_b);
+	// 	}
+	// }
+	// while (*stack_b)
+	// 	pa(stack_a, stack_b);
 }
 
-// void sort(t_stack **stack_a, t_stack **stack_b)
-// {
-// 	if (*stack_a == NULL || is_sorted(*stack_a))
-// 		return;
-
-// 	int size = stacksize(*stack_a);
-
-// 	while (!is_sorted(*stack_a))
-// 	{
-// 		if ((*stack_a)->value == find_min(*stack_a))
-// 			pb(stack_a, stack_b);
-// 		else
-// 			ra(stack_a);
-// 	}
-
-// 	while (*stack_b)
-// 		pa(stack_a, stack_b);
-// }
+int get_approach_value(t_stack *stack, int value)
+{
+	int i = 0;
+	while (stack)
+	{
+		if (stack->value < value)
+			return i;
+		stack = stack->next;
+		i++;
+	}
+	return i;
+}
 
 int get_end_value(t_stack *stack)
 {

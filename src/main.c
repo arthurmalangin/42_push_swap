@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 16:50:00 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/02 01:14:06 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/02 15:30:38 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,17 @@ int is_sorted(t_stack *stack)
     while (stack->next)
     {
         if (stack->value > stack->next->value)
+            return (0);
+        stack = stack->next;
+    }
+    return (1);    
+}
+
+int is_sorted_reverse(t_stack *stack)
+{
+    while (stack->next)
+    {
+        if (stack->value < stack->next->value)
             return (0);
         stack = stack->next;
     }

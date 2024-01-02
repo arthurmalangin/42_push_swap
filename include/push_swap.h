@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 16:58:33 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/01 20:05:21 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/02 15:30:36 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,9 @@ void    rrb(t_stack **stack_b);
 int doublon(char **argv);
 int is_sorted(t_stack *stack);
 int find_min(t_stack *stack);
+int find_max(t_stack *stack);
+int get_end_value(t_stack *stack);
+void display_stack(t_stack **stack);
+int is_sorted_reverse(t_stack *stack);
 
 #endif

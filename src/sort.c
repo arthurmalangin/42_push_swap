@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 19:46:54 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/02 15:48:19 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/02 16:19:54 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ void sort(t_stack **stack_a, t_stack **stack_b)
 	}
 	if (stacksize(*stack_a) == 3)
 	{
-		while (!is_sorted_reverse(*stack_a))
+		ft_printf("stacksize 3\n");
+		while (!is_sorted(*stack_a))
 		{
+			ft_printf("stacksize 3 loop\n");
 			max_a = find_max(*stack_a);
 			min_a = find_min(*stack_a);
 			if ((*stack_a)->value == max_a)
@@ -64,20 +66,25 @@ void sort(t_stack **stack_a, t_stack **stack_b)
 				sa(stack_a);
 			}
 		}
-		if (find_max(*stack_a) < (*stack_b)->value)
+		ft_printf("stacksize 3 end\n");
+		while (*stack_b)
 		{
+			if (find_max(*stack_a) < (*stack_b)->value)
+			{
+				pa(stack_a, stack_b);
+				ra(stack_a);
+			}
+			else if (find_min(*stack_a) > (*stack_b)->value)
+			{
+				pa(stack_a, stack_b);
+			}
+			while ((*stack_a)->value < (*stack_b)->value)
+				ra(stack_a);
 			pa(stack_a, stack_b);
-			ra(stack_a);
 		}
-		else if (find_min(*stack_a) > (*stack_b)->value)
-		{
-			pa(stack_a, stack_b);
-		}
-		while ((*stack_a)->value < (*stack_b)->value)
+		while (!is_sorted(*stack_a))
 			ra(stack_a);
-		pa(stack_a, stack_b);
-		while (!is_sorted)
-			ra(stack_a);
+		
 	}
 	// while (*stack_a)
 	// {

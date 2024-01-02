@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 16:50:00 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/01 23:38:21 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/02 01:14:06 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,8 @@ void display_stack(t_stack **stack)
     }
 }
 
-void fill_stack(t_stack **stack, char **argv)
+void fill_stack(t_stack **stack, char **argv, int i)
 {
-    int i;
-
-    i = 1;
     while (argv[i])
     {
         add_stack(stack, ft_atoi(argv[i]));
@@ -81,19 +78,19 @@ int check_param(char **argv)
     int j;
 
     i = 1;
-    while (argv[i])
-    {
-        j = 0;
-        while (argv[i][j])
-        {
-            if (argv[i][j] == '-' && !ft_isdigit(argv[i][j + 1]))
-                return (0);
-            if (!ft_isdigit(argv[i][j]) && argv[i][j] != '-')
-                return (0);
-            j++;
-        }
-        i++;
-    }
+    // while (argv[i])
+    // {
+    //     j = 0;
+    //     while (argv[i][j])
+    //     {
+    //         if (argv[i][j] == '-' && !ft_isdigit(argv[i][j + 1]))
+    //             return (0);
+    //         if (!ft_isdigit(argv[i][j]) && argv[i][j] != '-')
+    //             return (0);
+    //         j++;
+    //     }
+    //     i++;
+    // }
     if (!doublon(argv))
         return (0);
     return (1);
@@ -134,9 +131,9 @@ int main(int argc, char **argv)
         return (0);
     }
     if (argc == 2)
-        fill_stack(&stack, ft_split(argv[1], ' '));
+        fill_stack(&stack, ft_split(argv[1], ' '), 0);
     else
-        fill_stack(&stack, argv);
+        fill_stack(&stack, argv, 1);
     sort(&stack, &stack_b);
     return (0);
 }

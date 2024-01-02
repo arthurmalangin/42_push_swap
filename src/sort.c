@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 19:46:54 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/02 16:46:33 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/02 17:26:27 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void sort(t_stack **stack_a, t_stack **stack_b)
 			{
 				pa(stack_a, stack_b);
 			}
-			while ((*stack_a)->value < (*stack_b)->value || (*stack_b)->value < get_end_value(*stack_a))
+			while (((*stack_a)->value < (*stack_b)->value || (*stack_b)->value < get_end_value(*stack_a)) && find_min(*stack_a) < (*stack_b)->value)
 				ra(stack_a);
 			pa(stack_a, stack_b);
 		}

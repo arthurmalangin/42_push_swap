@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 19:46:54 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/04 17:47:04 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:36:33 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,30 +47,27 @@ int get_inferior_value(t_stack *stack, int value)
 
 int get_approach_value(t_stack *stack, int value)
 {
-    int closest_value = stack->value;
-    int closest_difference = ft_abs(value - closest_value);
-    stack = stack->next;
+	int current_difference;
+    int closest_value;
+    int closest_difference;
+	t_stack *tmp;
 
-    while (stack)
+	tmp = stack;
+	closest_value = tmp->value;
+    tmp = tmp->next;
+	closest_difference = ft_abs(value - closest_value);
+    while (tmp)
 	{
-        int current_difference = ft_abs(value - stack->value);
-
-        if (current_difference < closest_difference ||
-            (current_difference == closest_difference && stack->value > closest_value)) 
+        current_difference = ft_abs(value - tmp->value);
+        if ((current_difference < closest_difference && tmp->value > value) ||
+            (current_difference == closest_difference && tmp->value > closest_value)) 
 		{
-            closest_value = stack->value;
+            closest_value = tmp->value;
             closest_difference = current_difference;
         }
-
-        stack = stack->next;
+        tmp = tmp->next;
     }
-
     return closest_value;
-}
-
-int get_approach_inferior(t_stack *stack, int value)
-{
-	return (get_inferior_value(stack, get_approach_value(stack, value)));
 }
 
 int get_index(t_stack *stack, int value)
@@ -86,6 +83,66 @@ int get_index(t_stack *stack, int value)
 	return 0;
 }
 
+void sort_stack_a_3(t_stack **stack_a)
+{
+	int min_a;
+	int max_a;
+
+	while (!is_sorted(*stack_a))
+	{
+		max_a = find_max(*stack_a);
+		min_a = find_min(*stack_a);
+		if ((*stack_a)->value == max_a)
+		{
+			ra(stack_a);
+			if (!is_sorted(*stack_a))
+				sa(stack_a);
+		}
+		else if ((*stack_a)->value == min_a)
+		{
+			ra(stack_a);
+		}
+		else
+		{
+			sa(stack_a);
+		}
+	}
+}
+
+void sort_stack_a_3_5(t_stack **stack_a, t_stack **stack_b)
+{
+	int min_a;
+	int max_a;
+
+	while (!is_sorted(*stack_a))
+	{
+		max_a = find_max(*stack_a);
+		min_a = find_min(*stack_a);
+		if ((*stack_a)->value == max_a)
+		{
+			if ((*stack_b)->value == find_min(*stack_b))
+				rotate_both(stack_a, stack_b);
+			else
+				ra(stack_a);
+			if (!is_sorted(*stack_a))
+				sa(stack_a);
+		}
+		else if ((*stack_a)->value == min_a)
+		{
+			if ((*stack_b)->value == find_min(*stack_b))
+				rotate_both(stack_a, stack_b);
+			else
+				ra(stack_a);
+		}
+		else
+		{
+			if (!is_sorted_reverse(*stack_b))
+				rb(stack_b);
+			sa(stack_a);
+		}
+	}
+}
+
 void sort(t_stack **stack_a, t_stack **stack_b)
 {
 	if (*stack_a == NULL || is_sorted(*stack_a))
@@ -95,44 +152,21 @@ void sort(t_stack **stack_a, t_stack **stack_b)
 	int min_a;
 	int max_a;
 
+	if (stacksize(*stack_a) == 3)
+	{
+		sort_stack_a_3(stack_a);
+		return;
+	}
 	pb(stack_a, stack_b);
 	pb(stack_a, stack_b);
 	min_b = find_min(*stack_b);
 	max_b = find_max(*stack_b);
 	if (stacksize(*stack_a) == 3)
 	{
-		//ft_printf("stacksize 3\n");
-		while (!is_sorted(*stack_a))
-		{
-			//ft_printf("stacksize 3 loop\n");
-			max_a = find_max(*stack_a);
-			min_a = find_min(*stack_a);
-			if ((*stack_a)->value == max_a)
-			{
-				if ((*stack_b)->value == min_b)
-					rotate_both(stack_a, stack_b);
-				else
-					ra(stack_a);
-				if (!is_sorted(*stack_a))
-					sa(stack_a);
-			}
-			else if ((*stack_a)->value == min_a)
-			{
-				if ((*stack_b)->value == min_b)
-					rotate_both(stack_a, stack_b);
-				else
-					ra(stack_a);
-			}
-			else
-			{
-				rb(stack_b);
-				sa(stack_a);
-			}
-		}
-		//ft_printf("stacksize 3 end\n");
+		sort_stack_a_3_5(stack_a, stack_b);
 		while (*stack_b)
 		{
-			//ft_printf("stacksize 3 pb: %d %d\n", get_approach_value(*stack_a, (*stack_b)->value), (*stack_b)->value);
+			//ft_printf("approach value of %d is %d\n", (*stack_b)->value, get_approach_value(*stack_a, (*stack_b)->value));
 			if (get_approach_value(*stack_a, (*stack_b)->value) == (*stack_a)->value && (*stack_b)->value < find_max(*stack_a))
 			{
 				pa(stack_a, stack_b);

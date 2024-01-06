@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 19:46:54 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/06 22:14:28 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/06 23:40:29 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,7 +226,7 @@ void sort(t_stack **stack_a, t_stack **stack_b)
 			rb(stack_b);
 		while ((*stack_a))
 		{
-			if ((*stack_a)->value > min_b && (*stack_a)->value < max_b)
+			if ((*stack_a)->value > find_min(*stack_b) && (*stack_a)->value < find_max(*stack_b))
 			{
 				ft_printf("approach value of %d is %d\n", (*stack_a)->value, get_approach_value_inferior(*stack_b, (*stack_a)->value));
 				if ((*stack_b)->value == get_approach_value_inferior(*stack_b, (*stack_a)->value))
@@ -236,18 +236,21 @@ void sort(t_stack **stack_a, t_stack **stack_b)
 				else
 					rb(stack_b);
 			}
-			else if ((*stack_a)->value < min_b)
+			else if ((*stack_a)->value < find_min(*stack_b))
 			{
-				while ((*stack_b)->value != find_min(*stack_b))
-					rb(stack_b);
-				pb(stack_a, stack_b);
-			}
-			else if ((*stack_a)->value > max_b)
-			{
+				ft_printf("min\n");
 				while ((*stack_b)->value != find_max(*stack_b))
 					rb(stack_b);
 				pb(stack_a, stack_b);
 			}
+			else if ((*stack_a)->value > find_max(*stack_b))
+			{
+				ft_printf("max\n");
+				while ((*stack_b)->value != find_max(*stack_b))
+					rb(stack_b);
+				pb(stack_a, stack_b);
+			}
+			ft_printf("loop\n");
 		}
 		while ((*stack_b)->value != find_max(*stack_b))
 				rb(stack_b);

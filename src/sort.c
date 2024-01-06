@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 19:46:54 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/06 17:36:33 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/06 21:56:45 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,31 @@ int get_approach_value(t_stack *stack, int value)
     }
     return closest_value;
 }
+
+int get_approach_value_inferior(t_stack *stack, int value)
+{
+    int current_difference;
+    int closest_value;
+    int closest_difference;
+    t_stack *tmp;
+
+    tmp = stack;
+    closest_value = INT_MIN;
+    closest_difference = INT_MAX;
+    while (tmp)
+    {
+        current_difference = ft_abs(value - tmp->value);
+        if ((current_difference < closest_difference && tmp->value < value) ||
+            (current_difference == closest_difference && tmp->value < closest_value && tmp->value < value)) 
+        {
+            closest_value = tmp->value;
+            closest_difference = current_difference;
+        }
+        tmp = tmp->next;
+    }
+    return closest_value;
+}
+
 
 int get_index(t_stack *stack, int value)
 {
@@ -194,6 +219,28 @@ void sort(t_stack **stack_a, t_stack **stack_b)
 				rra(stack_a);
 			else
 				ra(stack_a);
+	}
+	else
+	{
+		if ((*stack_b )->value == min_b)
+			rb(stack_b);
+		while ((*stack_a))
+		{
+			//if ((*stack_a)->value > min_b && (*stack_a)->value < max_b)
+			//{
+				//ft_printf("approach value of %d is %d\n", (*stack_a)->value, get_approach_value_inferior(*stack_b, (*stack_a)->value));
+				if ((*stack_b)->value == get_approach_value_inferior(*stack_b, (*stack_a)->value))
+				{
+					pb(stack_a, stack_b);
+				}
+				else
+					rb(stack_b);
+			//}
+		}
+		while ((*stack_b)->value != find_max(*stack_b))
+				rb(stack_b);
+		while (*stack_b)
+			pa(stack_a, stack_b);
 	}
 }
 

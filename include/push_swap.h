@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 16:58:33 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/02 15:30:36 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/06 21:47:34 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "../libft/src/libft.h"
+# include <limits.h>
 
 typedef struct s_stack
 {

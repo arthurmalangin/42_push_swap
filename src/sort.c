@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 19:46:54 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/07 01:00:36 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/07 01:30:00 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,11 +228,9 @@ void sort(t_stack **stack_a, t_stack **stack_b)
 		{
 			if ((*stack_a)->value > find_min(*stack_b) && (*stack_a)->value < find_max(*stack_b))
 			{
-				ft_printf("approach value of %d is %d\n", (*stack_a)->value, get_approach_value_inferior(*stack_b, (*stack_a)->value));
+				//ft_printf("approach value of %d is %d\n", (*stack_a)->value, get_approach_value_inferior(*stack_b, (*stack_a)->value));
 				if ((*stack_b)->value == get_approach_value_inferior(*stack_b, (*stack_a)->value))
-				{
 					pb(stack_a, stack_b);
-				}
 				else
 				{
 					while (!((*stack_b)->value == get_approach_value_inferior(*stack_b, (*stack_a)->value)))
@@ -244,24 +242,39 @@ void sort(t_stack **stack_a, t_stack **stack_b)
 					}
 				}
 			}
-			else if ((*stack_a)->value < find_min(*stack_b))
+			// else if ((*stack_a)->value < find_min(*stack_b))
+			// {
+			// 	//ft_printf("min\n");
+			// 	while ((*stack_b)->value != find_max(*stack_b))
+			// 	{
+			// 		if (get_index(*stack_b, find_max(*stack_b)) <= stacksize(*stack_b) / 2)
+			// 			rb(stack_b);
+			// 		else
+			// 			rrb(stack_b);
+			// 	}
+			// 	pb(stack_a, stack_b);
+			// }
+			else
 			{
-				ft_printf("min\n");
+				//ft_printf("max\n");
 				while ((*stack_b)->value != find_max(*stack_b))
-					rb(stack_b);
-				pb(stack_a, stack_b);
-			}
-			else if ((*stack_a)->value > find_max(*stack_b))
-			{
-				ft_printf("max\n");
-				while ((*stack_b)->value != find_max(*stack_b))
-					rb(stack_b);
+				{
+					if (get_index(*stack_b, find_max(*stack_b)) <= stacksize(*stack_b) / 2)
+						rb(stack_b);
+					else
+						rrb(stack_b);
+				}
 				pb(stack_a, stack_b);
 			}
 			//ft_printf("loop\n");
 		}
 		while ((*stack_b)->value != find_max(*stack_b))
+		{
+			if (get_index(*stack_b, find_max(*stack_b)) <= stacksize(*stack_b) / 2)
 				rb(stack_b);
+			else
+				rrb(stack_b);
+		}
 		while (*stack_b)
 			pa(stack_a, stack_b);
 	}

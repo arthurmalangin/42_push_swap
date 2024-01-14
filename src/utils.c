@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 02:23:23 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/14 03:12:14 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/14 04:44:29 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,12 @@ void    simplify_stack(t_stack **stack)
 
 	tmp = *stack;
 	copy = copy_stack(tmp);
-	copy = sort_tab(copy, get_stack_size(tmp));
+	copy = sort_tab(copy, get_stack_size(*stack));
+	i = 0;
 	while (tmp)
 	{
 		j = 0;
-		while (j < get_stack_size(tmp))
+		while (j < get_stack_size(*stack))
 		{
 			if (tmp->value == copy[j])
 			{

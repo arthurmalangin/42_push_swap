@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 16:50:00 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/14 03:12:56 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/14 04:44:52 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,9 @@ int main(int argc, char **argv)
     else
         fill_stack(&stack, argv, 1);
 	simplify_stack(&stack);
+	// ft_printf("===Stack===\n");
+	// display_stack(&stack);
+	// ft_printf("===========\n");
 	sort(&stack, &stack_b);
     return (0);
 }

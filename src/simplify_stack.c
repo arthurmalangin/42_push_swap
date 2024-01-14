@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 02:23:23 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/14 18:12:13 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/14 19:49:22 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,11 @@ void	simplify_stack(t_stack **stack)
 {
 	t_stack	*tmp;
 	int		*copy;
-	int		i;
 	int		j;
 
 	tmp = *stack;
 	copy = copy_stack(tmp);
 	copy = sort_tab(copy, get_stack_size(*stack));
-	i = 0;
 	while (tmp)
 	{
 		j = 0;

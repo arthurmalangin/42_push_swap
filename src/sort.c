@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 19:46:54 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/07 01:30:00 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/14 03:34:37 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,38 @@ void sort_stack_a_3_5(t_stack **stack_a, t_stack **stack_b)
 	}
 }
 
+void sort_radix(t_stack **stack_a, t_stack **stack_b)
+{
+	int size;
+	int max_value;
+	int max_bits;
+	int i;
+	int j;
+
+	size = stacksize(*stack_a);
+	max_value = size - 1;
+	max_bits = 0;
+	while ((max_value >> max_bits) != 0) // TODO SIMPLIFY IF WORK
+		max_bits++;
+	i = 0;
+	while (i < max_bits)
+	{
+		j = 0;
+		while (j < size)
+		{
+			if (((*stack_a)->value >> i) & 1)
+				ra(stack_a);
+			else
+				pb(stack_a, stack_b);
+			j++;
+		}
+		while (*stack_b)
+			pa(stack_a, stack_b);
+		i++;
+	}
+	
+}
+
 void sort(t_stack **stack_a, t_stack **stack_b)
 {
 	if (*stack_a == NULL || is_sorted(*stack_a))
@@ -182,12 +214,12 @@ void sort(t_stack **stack_a, t_stack **stack_b)
 		sort_stack_a_3(stack_a);
 		return;
 	}
-	pb(stack_a, stack_b);
-	pb(stack_a, stack_b);
-	min_b = find_min(*stack_b);
-	max_b = find_max(*stack_b);
-	if (stacksize(*stack_a) == 3)
+	if (stacksize(*stack_a) == 5)
 	{
+		pb(stack_a, stack_b);
+		pb(stack_a, stack_b);
+		min_b = find_min(*stack_b);
+		max_b = find_max(*stack_b);
 		sort_stack_a_3_5(stack_a, stack_b);
 		while (*stack_b)
 		{
@@ -222,61 +254,62 @@ void sort(t_stack **stack_a, t_stack **stack_b)
 	}
 	else
 	{
-		if ((*stack_b )->value == min_b)
-			rb(stack_b);
-		while ((*stack_a))
-		{
-			if ((*stack_a)->value > find_min(*stack_b) && (*stack_a)->value < find_max(*stack_b))
-			{
-				//ft_printf("approach value of %d is %d\n", (*stack_a)->value, get_approach_value_inferior(*stack_b, (*stack_a)->value));
-				if ((*stack_b)->value == get_approach_value_inferior(*stack_b, (*stack_a)->value))
-					pb(stack_a, stack_b);
-				else
-				{
-					while (!((*stack_b)->value == get_approach_value_inferior(*stack_b, (*stack_a)->value)))
-					{
-						if (get_index(*stack_b, get_approach_value_inferior(*stack_b, (*stack_a)->value)) <= stacksize(*stack_b) / 2)
-							rb(stack_b);
-						else
-							rrb(stack_b);
-					}
-				}
-			}
-			// else if ((*stack_a)->value < find_min(*stack_b))
-			// {
-			// 	//ft_printf("min\n");
-			// 	while ((*stack_b)->value != find_max(*stack_b))
-			// 	{
-			// 		if (get_index(*stack_b, find_max(*stack_b)) <= stacksize(*stack_b) / 2)
-			// 			rb(stack_b);
-			// 		else
-			// 			rrb(stack_b);
-			// 	}
-			// 	pb(stack_a, stack_b);
-			// }
-			else
-			{
-				//ft_printf("max\n");
-				while ((*stack_b)->value != find_max(*stack_b))
-				{
-					if (get_index(*stack_b, find_max(*stack_b)) <= stacksize(*stack_b) / 2)
-						rb(stack_b);
-					else
-						rrb(stack_b);
-				}
-				pb(stack_a, stack_b);
-			}
-			//ft_printf("loop\n");
-		}
-		while ((*stack_b)->value != find_max(*stack_b))
-		{
-			if (get_index(*stack_b, find_max(*stack_b)) <= stacksize(*stack_b) / 2)
-				rb(stack_b);
-			else
-				rrb(stack_b);
-		}
-		while (*stack_b)
-			pa(stack_a, stack_b);
+		sort_radix(stack_a, stack_b);
+		// if ((*stack_b )->value == min_b)
+		// 	rb(stack_b);
+		// while ((*stack_a))
+		// {
+		// 	if ((*stack_a)->value > find_min(*stack_b) && (*stack_a)->value < find_max(*stack_b))
+		// 	{
+		// 		//ft_printf("approach value of %d is %d\n", (*stack_a)->value, get_approach_value_inferior(*stack_b, (*stack_a)->value));
+		// 		if ((*stack_b)->value == get_approach_value_inferior(*stack_b, (*stack_a)->value))
+		// 			pb(stack_a, stack_b);
+		// 		else
+		// 		{
+		// 			while (!((*stack_b)->value == get_approach_value_inferior(*stack_b, (*stack_a)->value)))
+		// 			{
+		// 				if (get_index(*stack_b, get_approach_value_inferior(*stack_b, (*stack_a)->value)) <= stacksize(*stack_b) / 2)
+		// 					rb(stack_b);
+		// 				else
+		// 					rrb(stack_b);
+		// 			}
+		// 		}
+		// 	}
+		// 	// else if ((*stack_a)->value < find_min(*stack_b))
+		// 	// {
+		// 	// 	//ft_printf("min\n");
+		// 	// 	while ((*stack_b)->value != find_max(*stack_b))
+		// 	// 	{
+		// 	// 		if (get_index(*stack_b, find_max(*stack_b)) <= stacksize(*stack_b) / 2)
+		// 	// 			rb(stack_b);
+		// 	// 		else
+		// 	// 			rrb(stack_b);
+		// 	// 	}
+		// 	// 	pb(stack_a, stack_b);
+		// 	// }
+		// 	else
+		// 	{
+		// 		//ft_printf("max\n");
+		// 		while ((*stack_b)->value != find_max(*stack_b))
+		// 		{
+		// 			if (get_index(*stack_b, find_max(*stack_b)) <= stacksize(*stack_b) / 2)
+		// 				rb(stack_b);
+		// 			else
+		// 				rrb(stack_b);
+		// 		}
+		// 		pb(stack_a, stack_b);
+		// 	}
+		// 	//ft_printf("loop\n");
+		// }
+		// while ((*stack_b)->value != find_max(*stack_b))
+		// {
+		// 	if (get_index(*stack_b, find_max(*stack_b)) <= stacksize(*stack_b) / 2)
+		// 		rb(stack_b);
+		// 	else
+		// 		rrb(stack_b);
+		// }
+		// while (*stack_b)
+		// 	pa(stack_a, stack_b);
 	}
 }
 

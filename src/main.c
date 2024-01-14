@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 16:50:00 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/02 16:14:51 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/14 03:12:56 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,6 @@ int doublon(char **argv)
     return (1);
 }
 
-void    sort(t_stack **stack_a, t_stack **stack_b);
-
 int main(int argc, char **argv)
 {
     t_stack *stack;
@@ -145,6 +143,7 @@ int main(int argc, char **argv)
         fill_stack(&stack, ft_split(argv[1], ' '), 0);
     else
         fill_stack(&stack, argv, 1);
-    sort(&stack, &stack_b);
+	simplify_stack(&stack);
+	sort(&stack, &stack_b);
     return (0);
 }

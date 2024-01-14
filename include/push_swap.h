@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 16:58:33 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/06 21:47:34 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/14 02:26:21 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 typedef struct s_stack
 {
+	int				size;
 	int				value;
 	struct s_stack	*next;
 }	t_stack;
@@ -46,5 +47,8 @@ int find_max(t_stack *stack);
 int get_end_value(t_stack *stack);
 void display_stack(t_stack **stack);
 int is_sorted_reverse(t_stack *stack);
+void    sort(t_stack **stack_a, t_stack **stack_b);
+void    simplify_stack(t_stack **stack);
+int	get_stack_size(t_stack *stack);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 19:46:54 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/21 02:48:06 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/21 17:50:36 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	sort_init_little(t_stack **stack_a, t_stack **stack_b)
 
 void	sort(t_stack **stack_a, t_stack **stack_b)
 {
-	if (is_sorted(*stack_a))
-		return ;
 	if (stacksize(*stack_a) == 3)
 		sort_little_3(stack_a);
 	else if (stacksize(*stack_a) == 5)

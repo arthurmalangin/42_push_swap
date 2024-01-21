@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 05:18:01 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/21 02:46:53 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/21 17:30:04 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	get_approach_value(t_stack *stack, int value)
 	long long int		current_difference;
 	long long int		closest_value;
 	long long int		closest_difference;
-	t_stack	*tmp;
+	t_stack				*tmp;
 
 	tmp = stack;
 	closest_value = 2147483660;

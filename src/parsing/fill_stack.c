@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 20:19:42 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/20 06:39:51 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/21 17:29:37 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,6 @@ int	contain_char(char *str, char c)
 	return (0);
 }
 
-void display_tab(char **tab)
-{
-	int i;
-
-	i = 0;
-	while (tab[i])
-	{
-		ft_printf("tab[%d] = %s\n", i, tab[i]);
-		i++;
-	}
-}
-
 int	fill_stack_tabs(t_stack **stack, char *ptr)
 {
 	int		i;
@@ -79,7 +67,8 @@ int	fill_stack_tabs(t_stack **stack, char *ptr)
 	tab = ft_split(ptr, ' ');
 	while (tab[i])
 	{
-		if (ft_atoll(tab[i]) > INT_MAX || ft_atoll(tab[i]) < INT_MIN || contain_alpha(tab[i]))
+		if (ft_atoll(tab[i]) > INT_MAX || ft_atoll(tab[i])
+			< INT_MIN || contain_alpha(tab[i]))
 		{
 			free(ptr);
 			free_tab(tab);

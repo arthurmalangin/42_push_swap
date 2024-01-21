@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 18:01:32 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/21 02:47:49 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/21 16:55:35 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	sort_radix(t_stack **stack_a, t_stack **stack_b)
 	while (i < max_bits)
 	{
 		j = 0;
-		while (j < stacksize(*stack_a))
+		while (j < max_value + 1)
 		{
 			if (((*stack_a)->value >> i) & 1)
 				ra(stack_a);

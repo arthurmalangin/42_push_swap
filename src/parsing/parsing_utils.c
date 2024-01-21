@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:05:05 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/20 06:38:22 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/21 17:28:36 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ long long int	ft_atoll(const char *str)
 	return (nb * negative);
 }
 
-int contain_alpha(char *str)
+int	contain_alpha(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -52,9 +52,9 @@ int contain_alpha(char *str)
 	return (0);
 }
 
-int contain_empty_arg(char **argv)
+int	contain_empty_arg(char **argv)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (argv[i])

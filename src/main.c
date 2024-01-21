@@ -6,50 +6,36 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 16:50:00 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/14 18:57:20 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/21 02:47:06 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-t_stack	*new_stack(int value)
+void	display_stack(t_stack **stack)
 {
-	t_stack	*stack;
-
-	stack = (t_stack *)malloc(sizeof(t_stack));
-	if (!stack)
-		return (NULL);
-	stack->value = value;
-	stack->next = NULL;
-	return (stack);
-}
-
-void	add_stack(t_stack **stack, int value)
-{
-	t_stack	*new;
 	t_stack	*tmp;
 
-	new = new_stack(value);
-	if (!*stack)
+	tmp = *stack;
+	while (tmp)
 	{
-		*stack = new;
-	}
-	else
-	{
-		tmp = *stack;
-		while (tmp->next)
-		{
-			tmp = tmp->next;
-		}
-		tmp->next = new;
+		ft_putnbr_fd(tmp->value, 1);
+		ft_putchar_fd('\n', 1);
+		tmp = tmp->next;
 	}
 }
 
-void	fill_stack(t_stack **stack, char **argv, int i)
+void display_tab_fd(char **tab, int fd)
 {
-	while (argv[i])
+	int i;
+
+	i = 0;
+	while (tab[i])
 	{
-		add_stack(stack, ft_atoi(argv[i]));
+		ft_putstr_fd("\n-----START-----\n", fd);
+		ft_putstr_fd(tab[i], fd);
+		ft_putchar_fd('\n', fd);
+		ft_putstr_fd("\n-----END-----\n", fd);
 		i++;
 	}
 }
@@ -59,18 +45,38 @@ int	main(int argc, char **argv)
 	t_stack	*stack;
 	t_stack	*stack_b;
 
-	stack = NULL;
-	stack_b = NULL;
-	if (!check_param(argv))
+	//display_tab_fd(argv, open("log.txt", O_WRONLY | O_CREAT | O_TRUNC, 0666));
+	if (argc < 2)
 	{
 		ft_putstr_fd("Error\n", 2);
 		return (0);
 	}
-	if (argc == 2)
-		fill_stack(&stack, ft_split(argv[1], ' '), 0);
-	else
-		fill_stack(&stack, argv, 1);
-	simplify_stack(&stack);
+	stack = NULL;
+	stack_b = NULL;
+	if (!fill_stack(&stack, argv))
+	{
+		ft_putstr_fd("Error\n", 2);
+		return (0);
+	}
+	if (!stack)
+	{
+		ft_putstr_fd("Error\n", 2);
+		return (0);
+	}
+	if (!check_param(&stack))
+	{
+		ft_putstr_fd("Error\n", 2);
+		free_stack(&stack);
+		return (0);
+	}
+	if (!simplify_stack(&stack))
+	{
+		ft_putstr_fd("Error\n", 2);
+		free_stack(&stack);
+		return (0);
+	}
+	//display_stack(&stack);
 	sort(&stack, &stack_b);
+	free_stack(&stack);
 	return (0);
 }

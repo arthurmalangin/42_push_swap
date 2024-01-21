@@ -6,7 +6,7 @@
 #    By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/14 19:20:25 by amalangi          #+#    #+#              #
-#    Updated: 2024/01/14 19:47:23 by amalangi         ###   ########.fr        #
+#    Updated: 2024/01/19 19:11:33 by amalangi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME            =		push_swap
 
 CC              =       cc
 
-FLAG            =       -Wall -Wextra -Werror -g
+FLAG            =       -g
 
 LIBFT_FILE      =		libft.a
 
@@ -27,6 +27,7 @@ LIBFT_EX        =       $(LIBFT_LIB) $(FLAG)
 C_FILE          =       main.c	\
 						simplify_stack.c	\
 						sort.c	\
+						exit.c	\
 						instruction/instruction_handler_double.c	\
 						instruction/instruction_handler_move.c	\
 						instruction/instruction_handler_rotate.c	\
@@ -39,6 +40,9 @@ C_FILE          =       main.c	\
 						instruction/swap.c	\
 						parsing/check_param.c	\
 						parsing/doublon.c	\
+						parsing/fill_stack.c	\
+						parsing/join_free.c	\
+						parsing/parsing_utils.c	\
 						sort_utils/info_getter.c	\
 						sort_utils/sort_helper.c	\
 						sort_utils/sort_instruction.c	\

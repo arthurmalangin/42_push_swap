@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 02:23:23 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/14 19:49:22 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/17 12:25:32 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ int	*copy_stack(t_stack *stack)
 	int	i;
 
 	copy = malloc(sizeof(int) * get_stack_size(stack));
+	if (!copy)
+	{
+		ft_putstr_fd("Error\n", 1);
+		return (NULL);
+	}
 	i = 0;
 	while (stack)
 	{
@@ -53,19 +58,7 @@ int	*copy_stack(t_stack *stack)
 	return (copy);
 }
 
-void	display_tab(int *tab, int size)
-{
-	int	i;
-
-	i = 0;
-	while (i < size)
-	{
-		ft_printf("%d\n", tab[i]);
-		i++;
-	}
-}
-
-void	simplify_stack(t_stack **stack)
+int	simplify_stack(t_stack **stack)
 {
 	t_stack	*tmp;
 	int		*copy;
@@ -73,6 +66,8 @@ void	simplify_stack(t_stack **stack)
 
 	tmp = *stack;
 	copy = copy_stack(tmp);
+	if (!copy)
+		return (0);
 	copy = sort_tab(copy, get_stack_size(*stack));
 	while (tmp)
 	{
@@ -89,4 +84,5 @@ void	simplify_stack(t_stack **stack)
 		tmp = tmp->next;
 	}
 	free(copy);
+	return (1);
 }

@@ -6,22 +6,11 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 07:41:18 by amalangi          #+#    #+#             */
-/*   Updated: 2023/11/05 04:40:34 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/15 04:44:33 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-// int main()
-// {
-// 	char *s = "      split       this for   me  !       ";
-
-// 	char **result = ft_split(s, ' ');
-// 	if (!result)
-// 		printf("TEST_SUCCESS");
-// 	printf("TEST_FAILED");
-// 	return 0;
-// }
 
 static int	is_char(char c, char to_find)
 {

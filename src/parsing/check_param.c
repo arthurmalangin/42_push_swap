@@ -6,32 +6,28 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 18:49:01 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/14 18:59:07 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/15 01:54:40 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-int	check_param(char **argv)
+int	check_param(t_stack **stack)
 {
-	int	i;
-	int	j;
+	t_stack	*tmp;
+	t_stack	*tmp2;
 
-	i = 1;
-	while (argv[i])
+	tmp = *stack;
+	while (tmp)
 	{
-		j = 0;
-		if (argv[i][j] == '-')
-			j++;
-		while (argv[i][j])
+		tmp2 = tmp->next;
+		while (tmp2)
 		{
-			if (!ft_isdigit(argv[i][j]))
+			if (tmp->value == tmp2->value)
 				return (0);
-			j++;
+			tmp2 = tmp2->next;
 		}
-		i++;
+		tmp = tmp->next;
 	}
-	if (!doublon(argv))
-		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 05:18:01 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/14 18:59:16 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/21 02:46:53 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,13 @@ int	ft_abs(int n)
 
 int	get_approach_value(t_stack *stack, int value)
 {
-	int		current_difference;
-	int		closest_value;
-	int		closest_difference;
+	long long int		current_difference;
+	long long int		closest_value;
+	long long int		closest_difference;
 	t_stack	*tmp;
 
 	tmp = stack;
-	closest_value = tmp->value;
-	tmp = tmp->next;
+	closest_value = 2147483660;
 	closest_difference = ft_abs(value - closest_value);
 	while (tmp)
 	{

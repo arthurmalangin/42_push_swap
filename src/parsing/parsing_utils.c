@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:05:05 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/21 17:28:36 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:34:44 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,45 @@ int	contain_alpha(char *str)
 	return (0);
 }
 
-int	contain_empty_arg(char **argv)
+int	contain_numb(char *str)
 {
 	int	i;
 
 	i = 0;
+	while (str[i])
+	{
+		if (ft_isdigit(str[i]))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	check_sign(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if ((str[i] == '-' || str[i] == '+') && (!ft_isdigit(str[i + 1])
+				|| (i > 0 && str[i - 1] != ' ')))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	contain_empty_arg(char **argv)
+{
+	int	i;
+
+	i = 1;
 	while (argv[i])
 	{
-		if (ft_strlen(argv[i]) == 0)
+		if (ft_strlen(argv[i]) == 0 || !contain_numb(argv[i]))
+			return (1);
+		if (check_sign(argv[i]))
 			return (1);
 		i++;
 	}

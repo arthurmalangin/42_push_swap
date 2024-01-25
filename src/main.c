@@ -6,7 +6,7 @@
 /*   By: amalangi <amalangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 16:50:00 by amalangi          #+#    #+#             */
-/*   Updated: 2024/01/21 17:42:59 by amalangi         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:42:52 by amalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ int	main(int argc, char **argv)
 	t_stack	*stack_b;
 
 	if (argc < 2)
-	{
-		ft_putstr_fd("Error\n", 2);
 		return (0);
-	}
 	stack = NULL;
 	stack_b = NULL;
 	if (!fill_stack(&stack, argv))
